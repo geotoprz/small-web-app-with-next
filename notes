@@ -1,0 +1,12 @@
+      {homeProps ? (<div className={styles.main}>
+        {homeProps.sections.map(el => <div key={el.id}>home</div>)}
+          {/* <div className={styles.thirteen}>
+            <Image
+              src="/thirteen.svg"
+              alt="13"
+              width={40}
+              height={31}
+              priority
+            />
+          </div> */}
+      </div>) : (<h1>No data found</h1>)}
