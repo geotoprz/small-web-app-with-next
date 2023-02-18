@@ -1,23 +1,18 @@
 import Head from "next/head";
-import Image from "next/image";
-import { Inter } from "@next/font/google";
-import styles from "@/styles/Home.module.css";
 import axios from "axios";
-import { useState } from "react";
 import SectionOne from "@/components/HomepageSections/SectionOne";
 import SectionTwo from "@/components/HomepageSections/SectionTwo/SectionTwo";
+import { useRouter } from "next/router";
+import BaseHeading from "@/components/UI/BaseHeading";
+import BasePageContainer from "@/components/UI/BasePageContainer";
+import BaseDescription from "@/components/UI/BaseDescription";
 
-const inter = Inter({ subsets: ["latin"] });
-
-export default function Home({
-  menuProps,
-  homeProps,
-  sliderProps,
-  section = 2,
-}) {
-  const [activeSection, setActiveSection] = useState(section);
-
-  console.log("homepprops", homeProps);
+export default function Home({ menuProps, homeProps, sliderProps }) {
+  const router = useRouter();
+  const onChoosingSection = (section) => {
+    router.push(section);
+  };
+  console.log("router", router);
   return (
     <>
       <Head>
@@ -26,25 +21,56 @@ export default function Home({
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className="flex h-full w-full justify-center">
-        <div className="flex w-full max-w-7xl flex-col items-center gap-5 py-10">
-          <h2>Our Sections</h2>
-          <nav className="flex w-full justify-end gap-5 bg-red-100">
-            <button>Section 1</button>
-            <button>Section 2</button>
-          </nav>
-          {activeSection === 1 && <SectionOne />}
-          {activeSection === 2 && (
-            <SectionTwo sectionProps={homeProps.sections[1]} />
-          )}
-        </div>
-      </main>
+      <BasePageContainer>
+        <BaseHeading>Our Sections</BaseHeading>
+        <nav className="flex w-full justify-end gap-5 pb-3">
+          <button
+            type="button"
+            onClick={() => onChoosingSection("/?section=1")}
+          >
+            <div className="relative flex flex-col items-center gap-2">
+              <BaseDescription className="hover:text-teal-300">
+                Section 1
+              </BaseDescription>
+              <div
+                className={`${
+                  router.asPath === "/?section=1" || router.asPath === "/"
+                    ? "absolute"
+                    : "hidden"
+                } top-8 h-2 w-2 rounded-full bg-teal-300`}
+              />
+            </div>
+          </button>
+          <button
+            type="button"
+            onClick={() => onChoosingSection("/?section=2")}
+          >
+            <div className="relative flex flex-col items-center gap-2">
+              <BaseDescription className="hover:text-teal-300">
+                Section 2
+              </BaseDescription>
+              <div
+                className={`${
+                  router.asPath === "/?section=2" ? "absolute" : "hidden"
+                } top-8 h-2 w-2 rounded-full bg-teal-300`}
+              />
+            </div>
+          </button>
+        </nav>
+        {/* <div className="w-full"> */}
+        {(!router.query.section || router.query.section === "1") && (
+          <SectionOne sectionProps={homeProps?.sections[0]} />
+        )}
+        {router.query.section === "2" && (
+          <SectionTwo sectionProps={homeProps?.sections[1]} />
+        )}
+        {/* </div> */}
+      </BasePageContainer>
     </>
   );
 }
 
 export async function getStaticProps(context) {
-  // const menuData = await axios.get(process.env.NEXT_PUBLIC_MENU_API)
   let menuData;
   let homeData;
   let sliderData;

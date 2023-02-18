@@ -5,7 +5,7 @@ import SectionTwoGraph from "./SectionTwoGraph";
 const SectionTwo = ({ sectionProps }) => {
   console.log("sectionProps", sectionProps);
   return (
-    <div className="flex w-full">
+    <div className="flex w-full flex-col items-center gap-10 lg:flex-row">
       <SectionTwoGraph
         title={sectionProps.title}
         graphText={sectionProps.graphText}
