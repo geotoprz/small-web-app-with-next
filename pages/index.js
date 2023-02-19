@@ -7,12 +7,12 @@ import BaseHeading from "@/components/UI/BaseHeading";
 import BasePageContainer from "@/components/UI/BasePageContainer";
 import BaseDescription from "@/components/UI/BaseDescription";
 
-export default function Home({ menuProps, homeProps, sliderProps }) {
+export default function Home({ homeProps }) {
   const router = useRouter();
   const onChoosingSection = (section) => {
     router.push(section);
   };
-  console.log("router", router);
+
   return (
     <>
       <Head>
@@ -57,40 +57,29 @@ export default function Home({ menuProps, homeProps, sliderProps }) {
             </div>
           </button>
         </nav>
-        {/* <div className="w-full"> */}
         {(!router.query.section || router.query.section === "1") && (
           <SectionOne sectionProps={homeProps?.sections[0]} />
         )}
         {router.query.section === "2" && (
           <SectionTwo sectionProps={homeProps?.sections[1]} />
         )}
-        {/* </div> */}
       </BasePageContainer>
     </>
   );
 }
 
 export async function getStaticProps(context) {
-  let menuData;
   let homeData;
-  let sliderData;
-  try {
-    const resMenu = await axios.get(process.env.NEXT_PUBLIC_MENU_API);
-    menuData = resMenu.data?.data;
 
+  try {
     const resHome = await axios.get(process.env.NEXT_PUBLIC_HOME_API);
     homeData = resHome.data?.data;
-
-    const resSlider = await axios.get(process.env.NEXT_PUBLIC_SLIDER_API);
-    sliderData = resSlider.data?.data;
   } catch (err) {
     console.log(err);
   }
-  const menuProps = menuData ?? null;
   const homeProps = homeData ?? null;
-  const sliderProps = sliderData ?? null;
 
   return {
-    props: { menuProps, homeProps, sliderProps },
+    props: { homeProps },
   };
 }

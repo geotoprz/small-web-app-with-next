@@ -71,7 +71,9 @@ const SectionTwoForm = ({ formText, formLabels, buttonText }) => {
 
   return (
     <div className="flex flex-col items-center gap-5 text-center">
-      <BaseTitle className="font-bold">{formText}</BaseTitle>
+      <BaseTitle className="font-bold">
+        {formText ?? "Validate your info"}
+      </BaseTitle>
       <BaseDescription>
         We work with ecosystem leaders, corporations and startups worldwide. How
         can we help you?
@@ -80,13 +82,13 @@ const SectionTwoForm = ({ formText, formLabels, buttonText }) => {
         onSubmit={handleSubmit(onSubmit)}
         className="flex flex-col items-center gap-1"
       >
-        {formLabels.map((label) => {
+        {formLabels?.map((label, i) => {
           return (
             <>
               {getInputEntity(label) && (
                 <div
                   className="flex w-full flex-col items-center gap-2"
-                  key={label}
+                  key={`Form input ${i}`}
                 >
                   <input
                     type={getInputEntity(label).type}
@@ -107,7 +109,7 @@ const SectionTwoForm = ({ formText, formLabels, buttonText }) => {
           );
         })}
         <button className="bg-blue-500 px-8 py-3 text-white outline-none">
-          {buttonText}
+          {buttonText ?? "Submit"}
         </button>
       </form>
     </div>

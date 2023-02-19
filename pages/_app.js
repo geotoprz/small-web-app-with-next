@@ -1,4 +1,4 @@
-import TheHeader from "@/components/TheHeader";
+import TheHeader from "@/components/navigation/TheHeader";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import "@/styles/globals.css";

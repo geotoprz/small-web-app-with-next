@@ -1,7 +1,7 @@
 import Image from "next/image";
-import img0 from "/public/images/Page1-19.png";
-import img1 from "/public/images/Page1-13.png";
-import img2 from "/public/images/Page1-7.png";
+import img0 from "@/assets/images/page2/Page1-19.png";
+import img1 from "@/assets/images/page2/Page1-13.png";
+import img2 from "@/assets/images/page2/Page1-7.png";
 import BaseTitle from "../UI/BaseTitle";
 import { MdChevronRight } from "react-icons/md";
 import BaseDescription from "../UI/BaseDescription";
@@ -30,18 +30,22 @@ const ContactCards = ({ cardProps }) => {
                 fill
               />
             </div>
-            <BaseTitle>{card.title}</BaseTitle>
-            <BaseDescription className="py-5 lg:pb-8">
-              {card.description}
-            </BaseDescription>
-            <button
-              type="button"
-              onClick={() => console.log("redirecting")}
-              className="flex items-center gap-2 hover:text-teal-300"
-            >
-              <BaseDescription>{card.label}</BaseDescription>
-              <MdChevronRight className="text-lg lg:text-xl xl:text-2xl" />
-            </button>
+            {card?.title && <BaseTitle>{card.title}</BaseTitle>}
+            {card?.description && (
+              <BaseDescription className="py-5 lg:pb-8">
+                {card.description}
+              </BaseDescription>
+            )}
+            {card?.label && (
+              <button
+                type="button"
+                onClick={() => console.log("redirecting")}
+                className="flex items-center gap-2 hover:text-teal-300"
+              >
+                <BaseDescription>{card.label}</BaseDescription>
+                <MdChevronRight className="text-lg lg:text-xl xl:text-2xl" />
+              </button>
+            )}
           </div>
         </div>
       ))}

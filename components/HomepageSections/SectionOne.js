@@ -1,10 +1,11 @@
 import React from "react";
 import Image from "next/image";
+import BaseHeading from "../UI/BaseHeading";
 
 const SectionOne = ({ sectionProps }) => {
   return (
     <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
-      {sectionProps &&
+      {sectionProps ? (
         sectionProps.images?.map((image, i) => {
           return (
             <div
@@ -30,7 +31,10 @@ const SectionOne = ({ sectionProps }) => {
               </div>
             </div>
           );
-        })}
+        })
+      ) : (
+        <BaseHeading>No data found.</BaseHeading>
+      )}
     </div>
   );
 };

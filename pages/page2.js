@@ -5,14 +5,21 @@ import BaseHeading from "@/components/UI/BaseHeading";
 import BasePageContainer from "@/components/UI/BasePageContainer";
 
 const pageTwo = ({ pageProps }) => {
-  console.log("pageProps", pageProps);
   return (
-    <BasePageContainer>
-      <div className="flex flex-col gap-5 lg:gap-10 xl:gap-14 2xl:gap-16">
-        <BaseHeading>{pageProps.description}</BaseHeading>
-        <ContactCards cardProps={pageProps.tiles} />
-      </div>
-    </BasePageContainer>
+    <>
+      {pageProps?.tiles ? (
+        <BasePageContainer>
+          <div className="flex flex-col gap-5 lg:gap-10 xl:gap-14 2xl:gap-16">
+            <BaseHeading>
+              {pageProps?.description ?? "We match your unique business needs"}
+            </BaseHeading>
+            <ContactCards cardProps={pageProps.tiles} />
+          </div>
+        </BasePageContainer>
+      ) : (
+        <BaseHeading>No data found.</BaseHeading>
+      )}
+    </>
   );
 };
 

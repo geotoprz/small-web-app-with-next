@@ -20,21 +20,28 @@ const TheHeader = ({ menuProps, sliderProps }) => {
           {menuProps &&
             menuProps.map((menuElement) => {
               return (
-                <div
-                  key={menuElement.id}
-                  className="relative flex flex-col items-center gap-2"
-                >
-                  <div className="hover:text-teal-300">
-                    <Link href={menuElement.link}>{menuElement.title}</Link>
-                  </div>
-                  <div
-                    className={`${
-                      router.pathname === menuElement.link
-                        ? "absolute"
-                        : "hidden"
-                    } top-8 h-2 w-2 rounded-full bg-teal-300`}
-                  />
-                </div>
+                <>
+                  {menuElement?.link && (
+                    <div
+                      key={menuElement.id}
+                      className="relative flex flex-col items-center gap-2"
+                    >
+                      <div className="hover:text-teal-300">
+                        <Link href={menuElement.link}>
+                          {menuElement?.title ?? "Link"}
+                        </Link>
+                      </div>
+
+                      <div
+                        className={`${
+                          router.pathname === menuElement.link
+                            ? "absolute"
+                            : "hidden"
+                        } top-8 h-2 w-2 rounded-full bg-teal-300`}
+                      />
+                    </div>
+                  )}
+                </>
               );
             })}
           <Select
@@ -44,7 +51,7 @@ const TheHeader = ({ menuProps, sliderProps }) => {
             placeholder="Go to..."
           />
         </nav>
-        <TheSlider sliderProps={sliderProps} />
+        {sliderProps && <TheSlider sliderProps={sliderProps} />}
       </div>
     </div>
   );
