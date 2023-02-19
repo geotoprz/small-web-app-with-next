@@ -1,5 +1,5 @@
 {
-  "name": "vdf-assessment",
+  "name": "small-web-app-with-next",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -20,6 +20,7 @@
     "react-hook-form": "^7.43.1",
     "react-icons": "^4.7.1",
     "react-select": "^5.7.0",
+    "sharp": "^0.31.3",
     "swiper": "^9.0.5",
     "yup": "^1.0.0"
   },

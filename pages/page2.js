@@ -25,7 +25,7 @@ const pageTwo = ({ pageProps }) => {
 
 export default pageTwo;
 
-export async function getStaticProps(context) {
+export async function getStaticProps() {
   let pageData;
   try {
     const resPage = await axios.get(process.env.NEXT_PUBLIC_PAGE_API);

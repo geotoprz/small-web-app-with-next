@@ -68,7 +68,7 @@ export default function Home({ homeProps }) {
   );
 }
 
-export async function getStaticProps(context) {
+export async function getStaticProps() {
   let homeData;
 
   try {
